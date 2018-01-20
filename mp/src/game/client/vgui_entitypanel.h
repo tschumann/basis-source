@@ -31,6 +31,7 @@ public:
 
 	// constructor
 	CEntityPanel( vgui::Panel *pParent, const char *panelName );
+	~CEntityPanel() {};
 
 	virtual void	ComputeParent( void );
 	virtual void	ComputeAndSetSize( void );

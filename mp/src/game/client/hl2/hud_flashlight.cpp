@@ -28,6 +28,7 @@ class CHudFlashlight : public CHudElement, public vgui::Panel
 
 public:
 	CHudFlashlight( const char *pElementName );
+	~CHudFlashlight() {};
 	virtual void ApplySchemeSettings( vgui::IScheme *pScheme );
 
 protected:

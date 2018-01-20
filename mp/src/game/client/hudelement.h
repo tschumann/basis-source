@@ -28,7 +28,7 @@ public:
 	// constructor - registers object in global list
 								CHudElement( const char *pElementName );
 	// destructor - removes object from the global list
-	virtual						~CHudElement();
+								~CHudElement();
 
 	// called when the Hud is initialised (whenever the DLL is loaded)
 	virtual void				Init( void ) { return; }

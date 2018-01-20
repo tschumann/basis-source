@@ -27,6 +27,7 @@ public:
 	DECLARE_CLASS_SIMPLE( CHudVoiceSelfStatus, vgui::Panel );
 
 	CHudVoiceSelfStatus( const char *name );
+	~CHudVoiceSelfStatus() {};
 
 	virtual bool ShouldDraw();	
 	virtual void Paint();

@@ -49,6 +49,7 @@ class CHudDeathNotice : public CHudElement, public vgui::Panel
 	DECLARE_CLASS_SIMPLE( CHudDeathNotice, vgui::Panel );
 public:
 	CHudDeathNotice( const char *pElementName );
+	~CHudDeathNotice() {};
 
 	void Init( void );
 	void VidInit( void );

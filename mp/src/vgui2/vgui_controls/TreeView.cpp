@@ -70,6 +70,10 @@ public:
 		SetAllowKeyBindingChainToParent( true );
     }
 
+	~TreeNodeText()
+	{
+	}
+
 	MESSAGE_FUNC( OnTextChanged, "TextChanged" )
 	{
 		GetParent()->InvalidateLayout();
@@ -345,6 +349,10 @@ public:
 		SetBlockDragChaining( true );
 	}
 
+	~TreeNodeImage()
+	{
+	}
+
  	//!! this could possibly be changed to just disallow mouse input on the image panel
     virtual void OnMousePressed(MouseCode code)
     {
@@ -378,6 +386,10 @@ class TreeViewSubPanel : public Panel
 {
 public:
     TreeViewSubPanel(Panel *parent) : Panel(parent) {}
+
+	~TreeViewSubPanel()
+	{
+	}
 
     virtual void ApplySchemeSettings(IScheme *pScheme)
     {

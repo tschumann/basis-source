@@ -34,6 +34,7 @@ class CHudZoom : public vgui::Panel, public CHudElement
 
 public:
 	CHudZoom( const char *pElementName );
+	~CHudZoom() {};
 	
 	bool	ShouldDraw( void );
 	void	Init( void );
