@@ -54,3 +54,12 @@ config.cfg
 # shader files
 *.tmp
 
+Debug/
+Release/
+mp/src/lib/public/*.lib
+mp/src/lib/public/*.pdb
+sp/src/lib/public/*.lib
+sp/src/lib/public/*.pdb
+*.vpc_crc
+*.vpc.sentinel
+.vs/
