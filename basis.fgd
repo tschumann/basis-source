@@ -3585,6 +3585,7 @@
 @PointClass base(Weapon) studio("models/spore.mdl") = weapon_bugbait: "Bug bait" []
 @PointClass base(Weapon) studio("models/weapons/W_Alyx_Gun.mdl") = weapon_alyxgun: "Alyx Gun" []
 @PointClass base(Weapon) studio("models/weapons/W_annabelle.mdl") = weapon_annabelle: "Annabelle (Grigori)" []
+@PointClass base(Weapon) studio("models/weapons/w_slam.mdl") = weapon_slam : "S.L.A.M. - Selectable Lightweight Attack Munition" []
 
 
 @SolidClass base(Trigger) = trigger_rpgfire :
