@@ -1,0 +1,45 @@
+"GameInfo"
+{
+	game	"Basis Source"	// Mod's name (Steam)
+//	title	"BASIS"		// Mod's name (main menu)
+//	title2	"SOURCE"	// Mod's name (main menu)
+	gamelogo 1		// Shows an image as the title
+
+	developer "Team Sandpit" // Developer's name
+	developer_url "http://www.moddb.com/groups/team-sandpit"  // Developer's website
+	manual	"manual/index.html"
+	icon	"sandpit"	// Steam icon; relative path to 16x16 uncompressed .tga
+
+//	type singleplayer_only	// Don't show multiplayer options
+//	type multiplayer_only	// Don't show single player options
+
+	// These affect what shows up in Options
+	advcrosshair 1		// Show advance crosshair options
+	nocrosshair 0		// Don't show crosshair options
+	nodifficulty 0		// Don't show difficulty options
+	nomodels 0		// Don't show player model options 
+	nohimodels 0		// Don't use high-def player models
+				// Not implemented
+	hasportals 0		// Don't show Portal options
+
+	nodegraph 1		// Generate .nod files
+
+	// Don't show these maps in the Create Server Dialogue
+	hidden_maps
+	{
+	}
+
+	FileSystem
+	{
+		SteamAppId 218	// Episode One = 215
+				// Orange Box = 218
+		ToolsAppId 211	// Source SDK
+		
+		SearchPaths
+		{
+			Game	|gameinfo_path|.
+			Game	hl2
+			Game	hl2mp
+		}
+	}
+}
