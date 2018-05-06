@@ -18,6 +18,7 @@ ipch
 *.opensdf
 *.idb
 *.vcxproj
+*.vcxproj.filters
 *.sln
 
 # OSX/Linux build products

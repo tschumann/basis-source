@@ -47,3 +47,15 @@ $ git remote add valve https://github.com/ValveSoftware/source-sdk-2013
 $ # pull the latest changes from source-sdk-2013
 
 $ git pull valve master
+
+
+Compiling
+---------
+
+Windows
+=======
+
+cd mp/src
+./createallprojects.bat
+
+Open mp/src/everything.sln
