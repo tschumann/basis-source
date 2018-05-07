@@ -105,6 +105,11 @@ inline void *ReallocUnattributed( void *pMem, size_t nSize )
 // Standard functions in the CRT that we're going to override to call our allocator
 //-----------------------------------------------------------------------------
 #if defined(_WIN32) && !defined(_STATIC_LINKED)
+#if _MSC_VER >= 1910
+#ifndef _CRTNOALIAS
+#define _CRTNOALIAS
+#endif
+#endif
 // this magic only works under win32
 // under linux this malloc() overrides the libc malloc() and so we
 // end up in a recursion (as g_pMemAlloc->Alloc() calls malloc)
@@ -633,14 +638,14 @@ int _CrtSetDbgFlag( int nNewFlag )
 #define AFNAME(var) __p_ ## var
 #define AFRET(var)  &var
 
-int _crtDbgFlag = _CRTDBG_ALLOC_MEM_DF;
-int* AFNAME(_crtDbgFlag)(void)
+int _crtDbgFlag_ = _CRTDBG_ALLOC_MEM_DF;
+int* AFNAME(_crtDbgFlag_)(void)
 {
-	return AFRET(_crtDbgFlag);
+	return AFRET(_crtDbgFlag_);
 }
 
-long _crtBreakAlloc;      /* Break on this allocation */
-long* AFNAME(_crtBreakAlloc) (void)
+long _crtBreakAlloc_;      /* Break on this allocation */
+long* AFNAME(_crtBreakAlloc_) (void)
 {
 	return AFRET(_crtBreakAlloc);
 }
@@ -1384,10 +1389,10 @@ struct _tiddata {
 
     /* pointer to the copy of the multibyte character information used by
      * the thread */
-    pthreadmbcinfo  ptmbcinfo;
+    struct __crt_multibyte_data*  ptmbcinfo;
 
     /* pointer to the copy of the locale informaton used by the thead */
-    pthreadlocinfo  ptlocinfo;
+    struct __crt_locale_data*  ptlocinfo;
     int         _ownlocale;     /* if 1, this thread owns its own locale */
 
     /* following field is needed by NLG routines */
@@ -1551,7 +1556,7 @@ typedef struct _tiddata * _ptiddata;
 
 class _LocaleUpdate
 {
-    _locale_tstruct localeinfo;
+    _locale_t localeinfo;
     _ptiddata ptd;
     bool updated;
     public:
@@ -1586,7 +1591,7 @@ class _LocaleUpdate
     }
     _locale_t GetLocaleT()
     {
-        return &localeinfo;
+        return localeinfo;
     }
 };
 
