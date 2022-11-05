@@ -161,30 +161,62 @@ void* __cdecl _malloc_base( size_t nSize )
 	return AllocUnattributed( nSize );
 }
 #else
+#if _MSC_VER <= 1800
 void *_malloc_base( size_t nSize )
 {
 	return AllocUnattributed( nSize );
 }
+#else
+_CRTRESTRICT void* _malloc_base( size_t nSize )
+{
+	return AllocUnattributed( nSize );
+}
+#endif
 #endif
 
+#if _MSC_VER <= 1800
 void *_calloc_base( size_t nSize )
 {
 	void *pMem = AllocUnattributed( nSize );
 	memset(pMem, 0, nSize);
 	return pMem;
 }
+#else
+_CRTRESTRICT void* __cdecl _calloc_base( size_t _Count, size_t _Size )
+{
+	void* pMem = AllocUnattributed( _Size );
+	memset(pMem, 0, _Size);
+	return pMem;
+}
+#endif
 
+#if _MSC_VER <= 1800
 void *_realloc_base( void *pMem, size_t nSize )
 {
 	return ReallocUnattributed( pMem, nSize );
 }
+#else
+_CRTRESTRICT void* _realloc_base( void* pMem, size_t nSize )
+{
+	return ReallocUnattributed( pMem, nSize );
+}
+#endif
 
+#if _MSC_VER <= 1800
 void *_recalloc_base( void *pMem, size_t nSize )
 {
 	void *pMemOut = ReallocUnattributed( pMem, nSize );
 	memset(pMemOut, 0, nSize);
 	return pMemOut;
 }
+#else
+_CRTRESTRICT void* __cdecl _recalloc_base( void* _Block, size_t _Count, size_t _Size )
+{
+	void* pMemOut = ReallocUnattributed( _Block, _Size );
+	memset(pMemOut, 0, _Size);
+	return pMemOut;
+}
+#endif
 
 void _free_base( void *pMem )
 {
@@ -205,7 +237,12 @@ void * __cdecl _malloc_crt(size_t size)
 
 void * __cdecl _calloc_crt(size_t count, size_t size)
 {
+#if _MSC_VER <= 1800
 	return _calloc_base( count * size );
+#else
+	// pass 0 as the count because the override doesn't use the count argument
+	return _calloc_base( 0, count * size );
+#endif
 }
 
 void * __cdecl _realloc_crt(void *ptr, size_t size)
@@ -215,7 +252,12 @@ void * __cdecl _realloc_crt(void *ptr, size_t size)
 
 void * __cdecl _recalloc_crt(void *ptr, size_t count, size_t size)
 {
+#if _MSC_VER <= 1800
 	return _recalloc_base( ptr, size * count );
+#else
+	// pass 0 as the count because the override doesn't use the count argument
+	return _recalloc_base( ptr, 0, count * size );
+#endif
 }
 
 ALLOC_CALL void * __cdecl _recalloc ( void * memblock, size_t count, size_t size )
@@ -903,12 +945,21 @@ int __cdecl _CrtDbgReportW( int nRptType, const wchar_t *szFile, int nLine,
 	return 0;
 }
 
+#if _MSC_VER <= 1800
 int __cdecl _VCrtDbgReportA( int nRptType, const wchar_t * szFile, int nLine, 
 							 const wchar_t * szModule, const wchar_t * szFormat, va_list arglist )
 {
 	Assert(0);
 	return 0;
 }
+#else
+int __cdecl _VCrtDbgReportA( int _ReportType, void* _ReturnAddress, char const* _FileName, int _LineNumber,
+							 char const* _ModuleName, char const* _Format, va_list _ArgList )
+{
+	Assert(0);
+	return 0;
+}
+#endif
 
 int __cdecl _CrtSetReportHook2( int mode, _CRT_REPORT_HOOK pfnNewHook )
 {
