@@ -31,7 +31,7 @@ class CBaseViewport : public vgui::EditablePanel, public IViewPort, public IGame
 
 public: 
 	CBaseViewport();
-	~CBaseViewport();
+	virtual ~CBaseViewport();
 
 	virtual IViewPortPanel* CreatePanelByName(const char *szPanelName);
 	virtual IViewPortPanel* FindPanelByName(const char *szPanelName);

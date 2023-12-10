@@ -49,11 +49,6 @@ class CHudViewport : public CBaseViewport
 private:
 	DECLARE_CLASS_SIMPLE( CHudViewport, CBaseViewport );
 
-public:
-	~CHudViewport()
-	{
-	}
-
 protected:
 	virtual void ApplySchemeSettings( vgui::IScheme *pScheme )
 	{

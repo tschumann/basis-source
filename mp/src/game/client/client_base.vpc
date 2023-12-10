@@ -69,6 +69,9 @@ $Configuration
 		$IgnoreImportLibrary			"TRUE"
 		$AdditionalDependencies			"$BASE winmm.lib"	[$WIN32]
 		$AdditionalDependencies			"$BASE wsock32.lib Ws2_32.lib" [$BUILD_REPLAY]
+
+		// particles.lib defines _hypot, as so does libucrtd.lib
+		$ForceFileOutput				"Multiply Defined Symbol Only (/FORCE:MULTIPLE)"
 	}
 }
 
