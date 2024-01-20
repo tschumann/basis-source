@@ -45,22 +45,12 @@ Compiling
 Windows
 =======
 
-Install `mp/src/vs2013.reg`
+Install `mp/src/vs2013.reg` or `sp/src/vs2013.reg`
 
 Generate the project files:
 ```
-cd mp/src
-./createallprojects.bat
+mp/src/recreateallprojects.sh
+sp/src/recreateallprojects.sh
 ```
 
-Fix up the project files to work in a recent version of Visual Studio:
-```
-# change the ToolsVersion from 4.0 (Visual Studio 2010) to 15.0 (Visual Studio 2019)
-grep -rl "ToolsVersion=\"4.0\"" --include "*.vcxproj" --include "*.vcxproj.filters" | grep -v thirdparty | xargs sed -i 's/ToolsVersion=\"4.0\"/ToolsVersion=\"15.0\"/g'
-# add the latest WindowsTargetPlatformVersion to the project
-grep -rl "</ProjectGuid>" --include "*.vcxproj" | grep -v thirdparty | xargs sed -i 's/<\/ProjectGuid>/<\/ProjectGuid>\n    <WindowsTargetPlatformVersion>10.0<\/WindowsTargetPlatformVersion>/g'
-# add the PlatformToolset for Visual Studio 2019 to the project
-grep -rl "</TargetName>" --include "*.vcxproj" | grep -v thirdparty | xargs sed -i 's/<\/TargetName>/<\/TargetName>\n    <PlatformToolset>v142<\/PlatformToolset>/g'
-```
-
-Open mp/src/everything.sln
+Open `mp/src/everything.sln` and `sp/src/everything.sln`
